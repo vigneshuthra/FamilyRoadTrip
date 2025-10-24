@@ -24,7 +24,12 @@
       body {
         font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
           "Helvetica Neue", Arial;
-        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+        background: linear-gradient(
+          135deg,
+          #0f0f23 0%,
+          #1a1a2e 50%,
+          #16213e 100%
+        );
         color: #e2e8f0;
         min-height: 100vh;
         line-height: 1.6;
@@ -209,7 +214,6 @@
         gap: 8px;
       }
 
-      /* highlighted small gold header for Luxury Moment */
       .luxury-moment {
         background: rgba(212, 175, 55, 0.06);
         border-left: 4px solid #d4af37;
@@ -315,7 +319,6 @@
         font-weight: 600;
       }
 
-      /* responsive */
       @media (max-width: 1024px) {
         .content-grid {
           grid-template-columns: 1fr;
@@ -331,16 +334,22 @@
     <div class="container">
       <div class="header">
         <h1>Family Road Trip — Portugal</h1>
-        <p>October 25–30, 2025 • Lisbon → Nazaré → Aveiro → Porto → Douro → Serra da Estrela → Alentejo → Lisbon</p>
+        <p>
+          October 25–30, 2025 • Lisbon → Nazaré → Aveiro → Porto → Douro → Serra
+          da Estrela → Lisbon
+        </p>
       </div>
 
       <div class="trip-overview">
         <div class="overview-grid">
           <div class="overview-card">
             <h3>🗺️ Route</h3>
-            <p>LISBON → NAZARÉ → AVEIRO → PORTO → DOURO VALLEY → SERRA DA ESTRELA → ALENTEJO → LISBON</p>
+            <p>
+              LISBON → NAZARÉ → AVEIRO → PORTO → DOURO VALLEY → SERRA DA ESTRELA
+              → LISBON
+            </p>
           </div>
-         
+
           <div class="overview-card">
             <h3>📅 Duration</h3>
             <p>6 days, 5 nights — total driving: ~12 hours (relaxed pace)</p>
@@ -357,19 +366,56 @@
           <h3>📍 Interactive Route Map</h3>
           <div id="map"></div>
 
-          <div style="margin-top:12px">
-            <div style="font-weight:600;color:#cbd5e1;margin-bottom:8px">Legend</div>
-            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px">
-              <div style="width:12px;height:12px;border-radius:50%;background:#ef4444"></div>
-              <div style="color:#bfcfe0">Start/End</div>
+          <div style="margin-top: 12px">
+            <div style="font-weight: 600; color: #cbd5e1; margin-bottom: 8px">
+              Legend
             </div>
-            <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px">
-              <div style="width:12px;height:12px;border-radius:50%;background:#3b82f6"></div>
-              <div style="color:#bfcfe0">Attractions</div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-bottom: 6px;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 50%;
+                  background: #ef4444;
+                "
+              ></div>
+              <div style="color: #bfcfe0">Start/End</div>
             </div>
-            <div style="display:flex;gap:10px;align-items:center">
-              <div style="width:12px;height:12px;border-radius:50%;background:#10b981"></div>
-              <div style="color:#bfcfe0">Accommodations</div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                margin-bottom: 6px;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 50%;
+                  background: #3b82f6;
+                "
+              ></div>
+              <div style="color: #bfcfe0">Attractions</div>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center">
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 50%;
+                  background: #10b981;
+                "
+              ></div>
+              <div style="color: #bfcfe0">Accommodations</div>
             </div>
           </div>
         </aside>
@@ -377,25 +423,22 @@
     </div>
 
     <script>
-      /***********************
-       * Map initialization
-       ***********************/
       let map;
       let tileLayer;
-      let activeMarkers = []; // circle markers for current day
+      let activeMarkers = [];
       let activePolyline = null;
 
       function initMap() {
         map = L.map("map").setView([39.5, -8.0], 7);
-        tileLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap contributors",
-        });
+        tileLayer = L.tileLayer(
+          "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          {
+            attribution: "© OpenStreetMap contributors",
+          }
+        );
         tileLayer.addTo(map);
       }
 
-      /***********************
-       * Locations (coords)
-       ***********************/
       const locations = {
         lisbon: [38.7223, -9.1393],
         nazare: [39.6017, -9.0708],
@@ -403,14 +446,8 @@
         porto: [41.1579, -8.6291],
         douro: [41.1621, -7.7871],
         serra: [40.3947, -7.6204],
-        alentejo: [38.4431, -7.3806],
-        evora: [38.5664, -7.9077],
       };
 
-      /***********************
-       * Enriched dayData
-       * (keeps your original content + new luxury/family fields)
-       ***********************/
       const dayData = {
         1: {
           title: "Lisbon → Nazaré → Aveiro → Porto",
@@ -418,7 +455,8 @@
           route: {
             description:
               "Lisbon → Nazaré (1h15) → Aveiro (1h) → Porto (1h) — total ~3h driving (scenic coastal + estuarine stops).",
-            mapLink: "https://www.google.com/maps/dir/Lisbon/Nazar%C3%A9/Aveiro/Porto",
+            mapLink:
+              "https://www.google.com/maps/dir/Lisbon/Nazar%C3%A9/Aveiro/Porto",
           },
           highlights: [
             {
@@ -443,38 +481,83 @@
             title: "Porto Accommodation (Oct 25–27)",
             options: [
               {
-                name: "The Yeatman Hotel — 5⭐",
-                details:
-                  "Panoramic suites, Michelin 2-star restaurant, sweeping Douro views.",
-                link: "https://www.the-yeatman-hotel.com/",
-              },
-              {
                 name: "The Rebello Hotel — 5⭐",
                 details:
                   "Chic suites with rooftop pool and family-friendly facilities.",
                 link: "https://www.therebello.com/",
               },
-              {
-                name: "Maison Albar - Le Monumental Palace — 5⭐",
-                details: "Historic luxury in the city center with refined dining.",
-                link:
-                  "https://www.maisonalbar.com/en/hotel/le-monumental-palace-porto/",
-              },
             ],
           },
+          foodPlaces: [
+            {
+              name: "Pangeia By The Sea ⭐",
+              description: "Coastal dining with fresh seafood and ocean views.",
+            },
+            {
+              name: "Do Norte Café",
+              description: "Traditional Portuguese café with local pastries.",
+            },
+            {
+              name: "Floresta Cafe by Hungry Biker",
+              description:
+                "Trendy spot with hearty brunches and specialty coffee.",
+            },
+            {
+              name: "Majestic Café",
+              description: "Historic Belle Époque café — Porto's iconic gem.",
+            },
+            {
+              name: "Burga Ramen ⭐",
+              description: "Authentic ramen bowls perfect for a cozy dinner.",
+            },
+            {
+              name: "Holy Sandwich Shop",
+              description:
+                "Creative sandwiches and quick bites for the family.",
+            },
+          ],
+          activities: [
+            {
+              name: "Aveiro Traditional Moliceiro Boat Tour ⭐",
+              link: "https://www.getyourguide.com/aveiro-l2459/aveiro-traditional-moliceiro-boat-tour-t393116/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Harry Potter Guided Walking Tour",
+              link: "https://www.getyourguide.com/porto-l151/porto-harry-potter-guided-walking-tour-t429608/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto/Maia Indoor Skydiving Experience",
+              link: "https://www.getyourguide.com/maia-l101859/portomaia-indoor-skydiving-experience-t728245/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Spiritus Multimedia Show",
+              link: "https://www.getyourguide.com/porto-l151/porto-spiritus-multimedia-show-entry-ticket-t416811/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Charming Sailboat Cruise with Port Wine",
+              link: "https://www.getyourguide.com/vila-nova-de-gaia-l91806/porto-charming-sailboat-cruise-with-port-winesunset-option-t439369/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Classic Boat Cruise Along the Douro River ⭐",
+              link: "https://www.getyourguide.com/vila-nova-de-gaia-l91806/porto-classic-boat-cruise-along-the-douro-river-t483449/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+          ],
           familyHighlights: [
             "Spacious family suites with river views (kids sleep comfortably).",
             "Short driving segments — minimal transit fatigue for kids.",
             "Kid-friendly dining options near Ribeira waterfront.",
           ],
           luxuryMoment:
-            "Private rooftop dinner or a Michelin tasting at The Yeatman — perfect for a family celebration.",
+            "Private rooftop dinner or a Michelin tasting at The Rebello — perfect for a family celebration.",
           exclusiveExperiences: [
             "Private moliceiro boat just for the family (book ahead).",
             "Priority seating at a Michelin tasting menu (reserve in advance).",
           ],
           suggestedSchedule: {
-            morning: ["08:30 — Depart Lisbon", "10:00 — Nazaré miradouro & beach walk"],
+            morning: [
+              "08:30 — Depart Lisbon",
+              "10:00 — Nazaré miradouro & beach walk",
+            ],
             afternoon: [
               "13:00 — Lunch in Aveiro (riverside)",
               "15:00 — Moliceiro boat ride & transfer to Porto",
@@ -482,19 +565,16 @@
             evening: ["19:00 — Check-in & dinner at hotel restaurant"],
           },
           rocketNote:
-            "MrR0cket’s Tip: Bring a light windbreaker for Nazaré — coastal wind is real but views are cinematic.",
+            "MrR0cket's Tip: Bring a light windbreaker for Nazaré — coastal wind is real but views are cinematic.",
           mapPoints: ["lisbon", "nazare", "aveiro", "porto"],
-          images: [
-            // optional: add your hosted images (or remove if you don't want gallery)
-            // "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=1200",
-          ],
         },
 
         2: {
           title: "Explore Porto",
           date: "Sunday, Oct 26",
           route: {
-            description: "Full relaxed day in Porto — city walking, viewpoints and rooftop cocktails.",
+            description:
+              "Full relaxed day in Porto — city walking, viewpoints and rooftop cocktails.",
             mapLink: "https://www.google.com/maps/place/Porto,+Portugal",
           },
           highlights: [
@@ -512,8 +592,78 @@
             },
             {
               title: "Neonia Museum",
-              description: "Interactive neon installations — visually captivating for the whole family.",
+              description:
+                "Interactive neon installations — visually captivating for the whole family.",
               mapLink: "https://maps.google.com/?q=Neonia+Museum+Porto",
+            },
+          ],
+          foodPlaces: [
+            {
+              name: "Combi Roasters",
+              description:
+                "Specialty coffee and brunch in a vintage VW van setting.",
+            },
+            {
+              name: "7G Roaster & Brewery",
+              description:
+                "Craft coffee and beer with kid-friendly food options.",
+            },
+            {
+              name: "Do Norte Café ⭐",
+              description: "Traditional Portuguese café with local pastries.",
+            },
+            {
+              name: "Floresta Cafe by Hungry Biker",
+              description:
+                "Trendy spot with hearty brunches and specialty coffee.",
+            },
+            {
+              name: "Majestic Café ⭐",
+              description: "Historic Belle Époque café — Porto's iconic gem.",
+            },
+            {
+              name: "Burga Ramen",
+              description: "Authentic ramen bowls perfect for a cozy dinner.",
+            },
+            {
+              name: "Holy Sandwich Shop ⭐",
+              description:
+                "Creative sandwiches and quick bites for the family.",
+            },
+            {
+              name: "Confeitaria do Bolhão",
+              description:
+                "Traditional pastry shop for authentic Portuguese treats.",
+            },
+          ],
+          activities: [
+            {
+              name: "Porto Clérigos Tower Entry Ticket",
+              link: "https://www.getyourguide.com/porto-l151/torre-dos-clerigos-entrance-ticket-t57114/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Neonia Interactive Museum Entry",
+              link: "https://www.neonia.pt/en/",
+            },
+            {
+              name: "Porto Harry Potter Guided Walking Tour ⭐",
+              link: "https://www.getyourguide.com/porto-l151/porto-harry-potter-guided-walking-tour-t429608/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto/Maia Indoor Skydiving Experience",
+              link: "https://www.getyourguide.com/maia-l101859/portomaia-indoor-skydiving-experience-t728245/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Spiritus Multimedia Show ⭐",
+              link: "https://www.getyourguide.com/porto-l151/porto-spiritus-multimedia-show-entry-ticket-t416811/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Charming Sailboat Cruise with Port Wine ⭐",
+              link: "https://www.getyourguide.com/vila-nova-de-gaia-l91806/porto-charming-sailboat-cruise-with-port-winesunset-option-t439369/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Porto Classic Boat Cruise Along the Douro River",
+              link: "https://www.getyourguide.com/vila-nova-de-gaia-l91806/porto-classic-boat-cruise-along-the-douro-river-t483449/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
             },
           ],
           accommodation: {
@@ -538,12 +688,21 @@
             "After-hours access to a small gallery or cinema (arranged ahead).",
           ],
           suggestedSchedule: {
-            morning: ["09:00 — Breakfast & street art walk", "11:00 — Livraria Lello (early slot)"],
-            afternoon: ["13:00 — Lunch at Cantina 32", "15:00 — Neonia Interactive visit"],
-            evening: ["18:00 — Rooftop drinks & sunset at The Rebello", "20:00 — Optional Michelin dinner"],
+            morning: [
+              "09:00 — Breakfast & street art walk",
+              "11:00 — Livraria Lello (early slot)",
+            ],
+            afternoon: [
+              "13:00 — Lunch at Cantina 32",
+              "15:00 — Neonia Interactive visit",
+            ],
+            evening: [
+              "18:00 — Rooftop drinks & sunset at The Rebello",
+              "20:00 — Optional Michelin dinner",
+            ],
           },
           rocketNote:
-            "MrR0cket’s Tip: Book Livraria Lello timed entry early — do the rooftop later for sunset.",
+            "MrR0cket's Tip: Book Livraria Lello timed entry early — do the rooftop later for sunset.",
           mapPoints: ["porto"],
         },
 
@@ -553,7 +712,8 @@
           route: {
             description:
               "Porto → Peso da Régua → Pinhão — ~120 km scenic drive (~1h40) via A4 — vineyard-lined roads.",
-            mapLink: "https://www.google.com/maps/dir/Porto/Peso+da+R%C3%A9gua/Pinh%C3%A3o",
+            mapLink:
+              "https://www.google.com/maps/dir/Porto/Peso+da+R%C3%A9gua/Pinh%C3%A3o",
           },
           highlights: [
             {
@@ -563,17 +723,68 @@
             },
             {
               title: "Private Douro River Cruise",
-              description: "2-hour private cruise with light lunch — family friendly.",
+              description:
+                "2-hour private cruise with light lunch — family friendly.",
               mapLink: "https://maps.google.com/?q=Pinhao+Douro+River+Portugal",
+            },
+          ],
+          foodPlaces: [
+            {
+              name: "DOC Restaurant (Folgosa)",
+              description:
+                "Michelin-starred riverside dining with stunning Douro views.",
+            },
+            {
+              name: "Castas e Pratos (Pinhão)",
+              description:
+                "Traditional Portuguese cuisine in the heart of wine country.",
+            },
+            {
+              name: "Veladouro Restaurant",
+              description:
+                "Local dishes with terrace overlooking the vineyards.",
+            },
+            {
+              name: "Restaurante Rabelo",
+              description:
+                "Family-friendly spot with regional specialties and river views.",
+            },
+            {
+              name: "The Vintage House Restaurant",
+              description:
+                "Elegant dining with wine pairings and kid-friendly options.",
+            },
+          ],
+          activities: [
+            {
+              name: "Pinhao- River Douro on SpeedBoat Tour with water sports ⭐",
+              link: "https://www.getyourguide.com/douro-river-l4071/pinhao-river-douro-speedboat-tour-with-water-sports-t385356/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "516 Arouca Hanging Bridge ⭐",
+              link: "https://www.getyourguide.com/alvarenga-l187055/from-arouca-516-arouca-bridge-paiva-walkways-guided-tour-t496795/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Douro Valley Private Tour on solar powered boat",
+              link: "https://www.getyourguide.com/pinhao-l89870/pinhao-douro-river-solar-boat-tour-with-wine-tasting-t611115/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Douro River Cruise from Pinhão ⭐",
+              link: "https://www.getyourguide.com/pinhao-l89870/pinhao-douro-river-1-hour-boat-trip-with-port-wine-t626174/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrROcket_Porto_activities",
+            },
+            {
+              name: "Quinta do Tedo Wine & Olive Oil Tasting",
+              link: "https://www.quintadotedo.com/en/",
             },
           ],
           accommodation: {
             title: "Douro Valley Accommodation (Oct 27–28)",
             options: [
               {
-                name: "Six Senses Douro Valley",
-                details: "Two-bedroom villas, organic spa and family programs.",
-                link: "https://www.sixsenses.com/en/resorts/douro-valley",
+                name: "Octant Douro",
+                details:
+                  "Modern riverside hotel with family-friendly amenities and stunning Douro views.",
+                link: "https://www.octanthotels.com/douro/",
               },
             ],
           },
@@ -585,16 +796,22 @@
           luxuryMoment:
             "Private sunset cruise on Douro with chef-prepared picnic — unforgettable family moment.",
           exclusiveExperiences: [
-            "Chef’s table for the family at the resort.",
-            "Private grape-juice tasting & kids’ grape stomp (seasonal).",
+            "Chef's table for the family at the resort.",
+            "Private grape-juice tasting & kids' grape stomp (seasonal).",
           ],
           suggestedSchedule: {
-            morning: ["10:00 — Depart Porto", "11:30 — Peso da Régua viewpoint stop"],
-            afternoon: ["14:00 — Check-in at Six Senses", "16:00 — Private river cruise"],
-            evening: ["19:30 — Dinner at Six Senses — family menu available"],
+            morning: [
+              "10:00 — Depart Porto",
+              "11:30 — Peso da Régua viewpoint stop",
+            ],
+            afternoon: [
+              "14:00 — Check-in at Octant Douro",
+              "16:00 — Private river cruise",
+            ],
+            evening: ["19:30 — Dinner at Octant Douro — family menu available"],
           },
           rocketNote:
-            "MrR0cket’s Tip: Reserve the family river cruise and a chef’s-table slot well in advance for peak weekends.",
+            "MrR0cket's Tip: Reserve the family river cruise and a chef's-table slot well in advance for peak weekends.",
           mapPoints: ["porto", "douro"],
         },
 
@@ -604,12 +821,14 @@
           route: {
             description:
               "Douro Valley → Peso da Régua → Belmonte → Manteigas — mountain route (~3h).",
-            mapLink: "https://www.google.com/maps/dir/Douro+Valley/Belmonte/Manteigas",
+            mapLink:
+              "https://www.google.com/maps/dir/Douro+Valley/Belmonte/Manteigas",
           },
           highlights: [
             {
               title: "Belmonte Village",
-              description: "Medieval streets and unobstructed panoramic photo spots.",
+              description:
+                "Medieval streets and unobstructed panoramic photo spots.",
               mapLink: "https://maps.google.com/?q=Belmonte+Portugal",
             },
             {
@@ -618,13 +837,66 @@
               mapLink: "https://maps.app.goo.gl/c159vP9fMmLBzfCY9",
             },
           ],
+          foodPlaces: [
+            {
+              name: "Casa de São Lourenço Restaurant ⭐",
+              description:
+                "Mountain cuisine with local ingredients and panoramic views.",
+            },
+            {
+              name: "Restaurante O Albertino (Manteigas)",
+              description:
+                "Traditional Serra da Estrela dishes and hearty soups.",
+            },
+            {
+              name: "Restaurante Brisas da Gardunha (Belmonte)",
+              description:
+                "Family-run restaurant with authentic regional cuisine.",
+            },
+            {
+              name: "Hotel Berne Restaurant ⭐",
+              description:
+                "Cozy mountain dining with fireplace and comfort food.",
+            },
+            {
+              name: "Petiscana (Manteigas) ⭐",
+              description:
+                "Local petiscos and grilled meats in rustic setting.",
+            },
+          ],
+          activities: [
+            {
+              name: "Serra da Estrela Guided Tour on Jeep ⭐",
+              link: "https://www.getyourguide.com/penhas-douradas-l188868/manteigas-2-hour-customizable-4x4-jeep-tour-in-serra-da-estrela-t1106581/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Serra da Estrela Canyoning",
+              link: "https://www.getyourguide.com/covilha-l95192/serra-da-estrela-canyoning-t1047549/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Covão dos Conchos Lagoon Guided Walk ⭐",
+              link: "https://aldeiashistoricasdeportugal.com/pacote/tour-covao-dos-conchos/",
+            },
+            {
+              name: "Serra da Estrela Cheese Farm Visit",
+              link: "https://www.viajecomigo.com/en/things-to-do-serra-da-estrela/",
+            },
+             {
+              name: "Torre and Covao Guided Tour",
+              link: "https://www.getyourguide.com/penhas-de-saude-l184902/torre-and-covao-d-metade-t955612/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Poço do Inferno Waterfall Trail ⭐",
+              link: "https://www.alltrails.com/pt-pt/trilho/portugal/guarda/pr1-mtg-rota-do-poco-do-inferno",
+            },
+          ],
           accommodation: {
-            title: "Serra da Estrela Accommodation (Oct 28–29)",
+            title: "Serra da Estrela Accommodation (Oct 28–30)",
             options: [
               {
-                name: "Casa das Penhas Douradas",
-                details: "Cozy eco-lodge with mountain balcony and spa.",
-                link: "https://www.penhasdouradas.com/",
+                name: "Casa de São Lourenço",
+                details: "Mountain retreat with stunning views and family-friendly amenities.",
+                link: "https://www.casadesaolourenco.com/",
               },
             ],
           },
@@ -640,113 +912,242 @@
             "Guided family nature walk with educator.",
           ],
           suggestedSchedule: {
-            morning: ["09:30 — Scenic drive through Peso da Régua", "12:30 — Lunch stop"],
-            afternoon: ["15:00 — Check-in & family hike", "17:30 — Picnic at viewpoint"],
+            morning: [
+              "09:30 — Scenic drive through Peso da Régua",
+              "12:30 — Lunch stop",
+            ],
+            afternoon: [
+              "15:00 — Check-in & family hike",
+              "17:30 — Picnic at viewpoint",
+            ],
             evening: ["20:00 — Lodge dinner & board games by the fireplace"],
           },
           rocketNote:
-            "MrR0cket’s Tip: Pack a small first-aid kit and layered clothing for mountain microclimates.",
+            "MrR0cket's Tip: Pack a small first-aid kit and layered clothing for mountain microclimates.",
           mapPoints: ["douro", "serra"],
         },
 
         5: {
-          title: "Serra da Estrela → Alentejo (Monsaraz)",
+          title: "Explore Serra da Estrela Region",
           date: "Wednesday, Oct 29",
           route: {
-            description: "Serra da Estrela → Monsaraz (Alentejo) — ~3h30 drive, countryside & hilltop village.",
-            mapLink: "https://www.google.com/maps/dir/Serra+da+Estrela/Monsaraz",
+            description:
+              "Full day exploring Serra da Estrela — local villages and mountain landscapes.",
+            mapLink:
+              "https://www.google.com/maps/place/Serra+da+Estrela,+Portugal",
           },
           highlights: [
             {
-              title: "Monsaraz Medieval Village",
-              description: "Castle sunset views and narrow whitewashed streets.",
-              mapLink: "https://maps.google.com/?q=Monsaraz+Portugal",
+              title: "Poço do Inferno Waterfall",
+              description:
+                "Beautiful waterfall with family-friendly hiking trail.",
+              mapLink: "https://maps.app.goo.gl/X7HPebUFD3siYaQz6",
             },
             {
-              title: "Alqueva Dark Sky Reserve",
-              description: "Stargazing in one of Europe’s best dark-sky areas.",
-              mapLink: "https://maps.google.com/?q=Alqueva+Dark+Sky+Reserve+Portugal",
+              title: "Torre (Highest Point)",
+              description:
+                "Portugal's highest peak — stunning panoramic mountain views.",
+              mapLink: "https://maps.google.com/?q=Torre+Serra+da+Estrela",
+            },
+            {
+              title: "Sabugueiro Village",
+              description:
+                "Portugal's highest village — authentic mountain culture.",
+              mapLink: "https://maps.google.com/?q=Sabugueiro+Portugal",
+            },
+          ],
+          foodPlaces: [
+            {
+              name: "Casa de São Lourenço Restaurant",
+              description:
+                "Mountain cuisine with local ingredients and panoramic views.",
+            },
+            {
+              name: "Restaurante O Albertino (Manteigas) ⭐",
+              description:
+                "Traditional Serra da Estrela dishes and hearty soups.",
+            },
+            {
+              name: "Petiscana (Manteigas) ⭐",
+              description:
+                "Local petiscos and grilled meats in rustic setting.",
+            },
+            {
+              name: "Hotel Berne Restaurant ⭐",
+              description:
+                "Cozy mountain dining with fireplace and comfort food.",
+            },
+            {
+              name: "Ti Lena (Sabugueiro)",
+              description: "Traditional mountain tavern with local specialties.",
+            },
+          ],
+          activities: [
+            {
+              name: "Serra da Estrela Guided Tour on Jeep ",
+              link: "https://www.getyourguide.com/penhas-douradas-l188868/manteigas-2-hour-customizable-4x4-jeep-tour-in-serra-da-estrela-t1106581/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Serra da Estrela Canyoning ⭐",
+              link: "https://www.getyourguide.com/covilha-l95192/serra-da-estrela-canyoning-t1047549/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Covão dos Conchos Lagoon Guided Walk ",
+              link: "https://aldeiashistoricasdeportugal.com/pacote/tour-covao-dos-conchos/",
+            },
+            {
+              name: "Serra da Estrela Cheese Farm Visit ⭐",
+              link: "https://www.viajecomigo.com/en/things-to-do-serra-da-estrela/",
+            },
+            {
+              name: "Torre and Covao Guided Tour ⭐",
+              link: "https://www.getyourguide.com/penhas-de-saude-l184902/torre-and-covao-d-metade-t955612/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Poço do Inferno Waterfall Trail ",
+              link: "https://www.alltrails.com/pt-pt/trilho/portugal/guarda/pr1-mtg-rota-do-poco-do-inferno",
             },
           ],
           accommodation: {
-            title: "Alentejo Accommodation (Oct 29–30)",
+            title: "Stay in Serra da Estrela (same accommodation)",
             options: [
               {
-                name: "São Lourenço do Barrocal",
-                details:
-                  "Meadow cottages, family activities, farm-to-table dining and spa.",
-                link: "https://www.barrocal.pt/en/",
+                name: "Casa de São Lourenço",
+                details: "Continue enjoying mountain retreat amenities.",
+                link: "https://casadesaolourenco.pt/en/location-and-contacts/",
               },
             ],
           },
           familyHighlights: [
-            "Large cottages with private outdoor spaces for kids to play.",
-            "Farm breakfasts, bikes, and gentle family excursions.",
-            "Evening stargazing activities — magical for children.",
+            "Relaxed day without packing — kids can enjoy hotel amenities.",
+            "Short scenic drives to nearby attractions.",
+            "Mountain air and outdoor activities for active families.",
           ],
           luxuryMoment:
-            "Private alfresco dinner under the stars with a local sommelier (non-alcoholic options for kids).",
+            "Private mountain picnic prepared by the hotel chef at a scenic viewpoint.",
           exclusiveExperiences: [
-            "Private horseback ride through vineyards at sunset.",
-            "Guided star-gazing with expert — family-friendly scope & narration.",
+            "Private guided 4x4 tour to hidden mountain spots.",
+            "Evening bonfire with stargazing at the hotel (weather permitting).",
           ],
           suggestedSchedule: {
-            morning: ["10:00 — Leisurely morning & drive to Monsaraz", "13:00 — Lunch and village walk"],
-            afternoon: ["16:00 — Check-in & pool time", "18:30 — Sunset horseback ride"],
-            evening: ["21:00 — Stargazing & family dessert al fresco"],
+            morning: [
+              "09:00 — Leisurely breakfast",
+              "10:30 — Visit Poço do Inferno or Torre",
+            ],
+            afternoon: [
+              "13:00 — Lunch in Sabugueiro village",
+              "15:30 — Cheese farm visit or relax at hotel",
+            ],
+            evening: [
+              "18:00 — Sunset views from hotel terrace",
+              "20:00 — Dinner at Casa de São Lourenço",
+            ],
           },
           rocketNote:
-            "MrR0cket’s Tip: Bring a small blanket for the kids for stargazing nights — it makes everything cozier.",
-          mapPoints: ["serra", "alentejo"],
+            "MrR0cket's Tip: The mountain weather can change quickly — pack layers and enjoy the dramatic cloud formations.",
+          mapPoints: ["serra"],
         },
 
         6: {
-          title: "Alentejo → Lisbon (Return)",
+          title: "Serra da Estrela → Tomar → Lisbon (Return)",
           date: "Thursday, Oct 30",
           route: {
-            description: "Short return to Lisbon — optional stop in Évora for Roman sights (~2h30 drive).",
-            mapLink: "https://www.google.com/maps/dir/Monsaraz/%C3%89vora/Lisbon",
+            description:
+              "Serra da Estrela → Tomar → Lisbon — scenic return via historic Templar town (~3h30 driving total).",
+            mapLink:
+              "https://www.google.com/maps/dir/Serra+da+Estrela/Tomar/Lisbon",
           },
           highlights: [
             {
-              title: "Évora (Optional Stop)",
-              description: "Roman Temple, Chapel of Bones — a unique historical stop for the family.",
-              mapLink: "https://maps.google.com/?q=Evora+Portugal",
+              title: "Convento de Cristo (Tomar)",
+              description:
+                "UNESCO World Heritage Templar castle & monastery — fascinating medieval architecture.",
+              mapLink: "https://maps.google.com/?q=Convento+de+Cristo+Tomar",
+            },
+            {
+              title: "Tomar Historic Center",
+              description:
+                "Charming riverside town with cafés and artisan shops.",
+              mapLink: "https://maps.google.com/?q=Tomar+Portugal+Center",
             },
           ],
-          activities: {
-            morning: ["Farm breakfast & pottery/tile workshop (family-friendly)"],
-            afternoon: ["Optional stop in Évora", "Arrive in Lisbon and end of trip"],
+          foodPlaces: [
+            {
+              name: "Taberna Ó Balcão (Tomar)",
+              description:
+                "Traditional Portuguese tavern with regional specialties.",
+            },
+            {
+              name: "Restaurante Bela Vista (Tomar)",
+              description: "Riverside dining with views of the old town.",
+            },
+            {
+              name: "Café Paraíso (Tomar)",
+              description:
+                "Historic café perfect for coffee and pastries before departure.",
+            },
+            {
+              name: "Napolis (Tomar)",
+              description: "Family-friendly pizzeria with quick service.",
+            },
+          ],
+          activities: [
+            {
+              name: "Convento de Cristo Guided Tour ⭐",
+              link: "https://www.getyourguide.com/lisbon-l42/tomar-knight-s-templar-castle-and-convent-of-christ-tour-t830337/?partner_id=UCXJEQX&utm_medium=online_publisher&cmp=MrRocket_suggested_activities",
+            },
+            {
+              name: "Tomar Self-Guided Walking Tour",
+              link: "https://www.komoot.com/guide/1208714/walking-in-tomar",
+            },
+          ],
+          dayActivities: {
+            morning: ["Leisurely breakfast at Casa de São Lourenço", "Check-out and depart for Tomar"],
+            afternoon: [
+              "Visit Convento de Cristo (UNESCO site)",
+              "Lunch in Tomar historic center",
+              "Stroll along the riverside",
+              "Continue to Lisbon — arrive late afternoon",
+            ],
           },
           familyHighlights: [
-            "Relaxed final day with optional cultural stop.",
-            "Easy airport/return logistics from Lisbon.",
+            "Cultural stop breaks up the drive — keeps kids engaged.",
+            "Castle exploration appeals to all ages.",
+            "Easy driving route back to Lisbon.",
           ],
           luxuryMoment:
-            "Private farewell lunch at a curated Alentejo estate before the drive back to Lisbon.",
+            "Private guided tour of Convento de Cristo with skip-the-line access and family-focused storytelling.",
           exclusiveExperiences: [
-            "Short private walking tour in Évora with skip-the-line access.",
+            "Early morning private access to Convento de Cristo (if arranged in advance).",
           ],
           suggestedSchedule: {
-            morning: ["09:00 — Farm breakfast & activity", "11:00 — Depart for Évora"],
-            afternoon: ["14:00 — Lunch in Évora (if stopping)", "16:30 — Arrive Lisbon"],
+            morning: [
+              "09:00 — Final breakfast & check-out",
+              "10:00 — Depart for Tomar (~2h drive)",
+            ],
+            afternoon: [
+              "12:30 — Arrive Tomar & visit Convento de Cristo",
+              "14:30 — Lunch in historic center",
+              "16:00 — Drive to Lisbon (~1h30)",
+              "17:30 — Arrive Lisbon — end of trip",
+            ],
           },
           rocketNote:
-            "MrR0cket’s Tip: If you have a late flight, request a late checkout at the Barrocal for a relaxed final day.",
-          mapPoints: ["alentejo", "evora", "lisbon"],
+            "MrR0cket's Tip: Book Convento de Cristo tickets online in advance to skip queues — the Manueline window alone is worth the stop!",
+          mapPoints: ["serra", "lisbon"],
         },
       };
 
-      /***********************
-       * UI rendering helpers
-       ***********************/
       function createDayButtons() {
         const container = document.getElementById("day-selector");
         container.innerHTML = "";
         Object.keys(dayData).forEach((num) => {
           const btn = document.createElement("button");
           btn.className = "day-btn";
-          btn.textContent = `Day ${num} - ${dayData[num].date.replace(",", "")}`;
+          btn.textContent = `Day ${num} - ${dayData[num].date.replace(
+            ",",
+            ""
+          )}`;
           btn.addEventListener("click", () => showDay(Number(num)));
           container.appendChild(btn);
         });
@@ -756,17 +1157,12 @@
         return (list || []).join(" — ");
       }
 
-      /***********************
-       * Map helpers
-       ***********************/
       function clearActiveMapLayers() {
-        // remove active markers
         activeMarkers.forEach((m) => {
           if (map && map.hasLayer(m)) map.removeLayer(m);
         });
         activeMarkers = [];
 
-        // remove active polyline
         if (activePolyline && map && map.hasLayer(activePolyline)) {
           map.removeLayer(activePolyline);
         }
@@ -785,8 +1181,6 @@
           porto: "#10b981",
           douro: "#10b981",
           serra: "#10b981",
-          alentejo: "#10b981",
-          evora: "#f59e0b",
         };
 
         const names = {
@@ -796,8 +1190,6 @@
           porto: "Porto",
           douro: "Douro Valley",
           serra: "Serra da Estrela",
-          alentejo: "Alentejo (Monsaraz)",
-          evora: "Évora",
         };
 
         points.forEach((point, idx) => {
@@ -813,7 +1205,9 @@
             weight: 2,
           }).addTo(map);
 
-          marker.bindPopup(`<strong>${names[point] || point}</strong><br>Stop ${idx + 1}`);
+          marker.bindPopup(
+            `<strong>${names[point] || point}</strong><br>Stop ${idx + 1}`
+          );
           activeMarkers.push(marker);
         });
 
@@ -826,27 +1220,23 @@
           }).addTo(map);
         }
 
-        // fit bounds to active markers
         if (activeMarkers.length > 0) {
           const group = L.featureGroup(activeMarkers);
           map.fitBounds(group.getBounds().pad(0.15));
         }
       }
 
-      /***********************
-       * showDay: main renderer
-       ***********************/
       function showDay(dayNum) {
         const day = dayData[dayNum];
         if (!day) return;
 
-        // active button
-        document.querySelectorAll(".day-btn").forEach((b) => b.classList.remove("active"));
+        document
+          .querySelectorAll(".day-btn")
+          .forEach((b) => b.classList.remove("active"));
         const allBtns = Array.from(document.querySelectorAll(".day-btn"));
         const targetBtn = allBtns[dayNum - 1];
         if (targetBtn) targetBtn.classList.add("active");
 
-        // build HTML
         const content = document.getElementById("day-content");
         let html = "";
 
@@ -860,18 +1250,22 @@
           </div>
         `;
 
-        // route block (object)
         if (day.route) {
           html += `
             <div class="route-info">
               <strong>🗺️ Route</strong>
-              <div style="margin-top:8px;color:#cbd5e1">${day.route.description || ""}</div>
-              ${day.route.mapLink ? `<div style="margin-top:10px"><a class="map-link" href="${day.route.mapLink}" target="_blank" rel="noopener noreferrer">View Route</a></div>` : ""}
+              <div style="margin-top:8px;color:#cbd5e1">${
+                day.route.description || ""
+              }</div>
+              ${
+                day.route.mapLink
+                  ? `<div style="margin-top:10px"><a class="map-link" href="${day.route.mapLink}" target="_blank" rel="noopener noreferrer">View Route</a></div>`
+                  : ""
+              }
             </div>
           `;
         }
 
-        // highlights
         if (day.highlights && day.highlights.length) {
           html += `<div class="section"><h3>🌟 Highlights</h3>`;
           day.highlights.forEach((h) => {
@@ -879,14 +1273,17 @@
               <div class="highlight-item" style="margin-bottom:10px">
                 <h4 style="margin:0 0 8px 0;color:#fbbf24">${h.title}</h4>
                 <p style="margin:0 0 8px 0;color:#dbe6f0">${h.description}</p>
-                ${h.mapLink ? `<a class="map-link" href="${h.mapLink}" target="_blank" rel="noopener noreferrer">📍 View on Map</a>` : ""}
+                ${
+                  h.mapLink
+                    ? `<a class="map-link" href="${h.mapLink}" target="_blank" rel="noopener noreferrer">📍 View on Map</a>`
+                    : ""
+                }
               </div>
             `;
           });
           html += `</div>`;
         }
 
-        // images (optional gallery)
         if (day.images && day.images.length) {
           html += `<div class="section"><h3>📸 Day Gallery</h3><div class="day-gallery">`;
           day.images.forEach((src) => {
@@ -895,18 +1292,58 @@
           html += `</div></div>`;
         }
 
-        // accommodation
+        if (day.foodPlaces && day.foodPlaces.length) {
+          html += `
+            <div class="section">
+              <h3>🍽️ Food Places to Try</h3>
+              <div style="display:grid;gap:10px">
+          `;
+          day.foodPlaces.forEach((place) => {
+            html += `
+              <div style="background:rgba(255,255,255,0.03);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)">
+                <h5 style="color:#fbbf24;margin:0 0 6px 0">${place.name}</h5>
+                <p style="margin:0;color:#cbd5e1;font-size:0.94rem">${
+                  place.description || ""
+                }</p>
+              </div>
+            `;
+          });
+          html += `</div></div>`;
+        }
+
+        if (day.activities && day.activities.length) {
+          html += `
+            <div class="section">
+              <h3>🎯 Activities</h3>
+              <div style="display:grid;gap:10px">
+          `;
+          day.activities.forEach((activity) => {
+            html += `
+              <a href="${
+                activity.link || "#"
+              }" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;background:rgba(59,130,246,0.08);padding:12px;border-radius:8px;border:1px solid rgba(59,130,246,0.15);transition:transform 0.18s ease,background 0.18s ease">
+                <h5 style="color:#60a5fa;margin:0">${activity.name}</h5>
+              </a>
+            `;
+          });
+          html += `</div></div>`;
+        }
+
         if (day.accommodation) {
           html += `
             <div class="section">
               <h3>🏨 Accommodation</h3>
               <div class="accommodation">
-                <h4 style="margin-bottom:10px">${day.accommodation.title || ""}</h4>
+                <h4 style="margin-bottom:10px">${
+                  day.accommodation.title || ""
+                }</h4>
                 <div class="hotel-options">
           `;
           day.accommodation.options.forEach((hotel) => {
             html += `
-              <a class="hotel-option" href="${hotel.link || "#"}" target="_blank" rel="noopener noreferrer">
+              <a class="hotel-option" href="${
+                hotel.link || "#"
+              }" target="_blank" rel="noopener noreferrer">
                 <h5 style="margin:0">${hotel.name}</h5>
                 <p>${hotel.details || ""}</p>
               </a>
@@ -915,7 +1352,6 @@
           html += `</div></div></div>`;
         }
 
-        // family highlights (if present)
         if (day.familyHighlights && day.familyHighlights.length) {
           html += `
             <div class="section family-highlights">
@@ -927,7 +1363,6 @@
           `;
         }
 
-        // luxury moment
         if (day.luxuryMoment) {
           html += `
             <div class="section luxury-moment">
@@ -937,7 +1372,6 @@
           `;
         }
 
-        // exclusive experiences
         if (day.exclusiveExperiences && day.exclusiveExperiences.length) {
           html += `
             <div class="section exclusive-experiences">
@@ -949,7 +1383,6 @@
           `;
         }
 
-        // suggested schedule (if present)
         if (day.suggestedSchedule) {
           html += `
             <div class="section suggested-schedule">
@@ -958,7 +1391,9 @@
                 .map(
                   ([t, items]) => `
                   <div style="margin-bottom:8px">
-                    <strong style="color:#aab8cf">${t.charAt(0).toUpperCase() + t.slice(1)}</strong>
+                    <strong style="color:#aab8cf">${
+                      t.charAt(0).toUpperCase() + t.slice(1)
+                    }</strong>
                     <ul>
                       ${items.map((it) => `<li>${it}</li>`).join("")}
                     </ul>
@@ -970,22 +1405,17 @@
           `;
         }
 
-        // rocket note
         if (day.rocketNote) {
           html += `<div class="rocket-note">${day.rocketNote}</div>`;
         }
 
         content.innerHTML = html;
-
-        // update map
         updateMap(day.mapPoints || []);
       }
 
-      // Initialize UI + map on DOMContentLoaded
       document.addEventListener("DOMContentLoaded", () => {
         initMap();
         createDayButtons();
-        // show first day by default
         showDay(1);
       });
     </script>
